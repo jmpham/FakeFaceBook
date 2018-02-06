@@ -12,6 +12,21 @@
 	<body>
 		<div class="title">
 		Fake Facebook: by Jonathan Pham
+			<form>
+			<table>
+				<tr> <td>Username</td> <td><input type="text"/> </td> </tr>
+				<tr> <td>Password</td> <td><input type="text"/> </td> </tr>
+				<tr> <td> <input type="submit" value="Login"/> </td> </tr>
+			</table>
+		</form>
+		<h3>SIGN UP</h3>
+		<form action="/FakeFaceBook/signupLogin.html" method="POST">
+			<table>
+				<tr> <td>FirstName</td> <td><input type="text" name="firstName"/> </td> <td>LastName</td> <td><input type="text" name="lastName"/> </td> </tr>
+				<tr> <td>Email</td> <td><input type="text" name="email"/> </td> <td>New Password</td> <td><input type="text" name="password"/> </td>  </tr>
+				<tr> <td> <input type="submit" value="SignUp"/> </td> </tr>
+			</table>
+		</form>		
 		</div>
 	</body>
 </html>
