@@ -1,0 +1,6 @@
+@charset "ISO-8859-1";
+
+.title{
+	border: 5px solid red;
+	margin: 100px auto;
+}
