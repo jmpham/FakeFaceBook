@@ -37,13 +37,22 @@ public class MainController {
 		System.out.println("SignUp Complete");
 		System.out.println("firstName: " + user.getFirstName() + " lastName:  " + user.getLastName() + " email:  " + user.getemail());
 		
-		//Update Database
+		//Update Database with New User Info
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
 			Statement myStmt = myConn.createStatement();
-			//Add user to DB
-			String sql = "insert into Users (firstName, lastName, email) values ('" + user.getFirstName() +"','"+ user.getLastName() +"','"+ user.getemail()+"')";
+			
+			//Get the latest ID from the DB
+			int ID = 0;
+			String sql = "Select * from Users";
+			ResultSet MyRs = myStmt.executeQuery(sql);
+			while(MyRs.next()) {
+				ID = MyRs.getInt("ID");
+				System.out.println("ID in DB is: " + ID + MyRs.getString("firstName") );
+			}
+			//Add user to DB with ID = ID+1
+			sql = "insert into Users (firstName, lastName, email) values ('" + user.getFirstName() +"','"+ user.getLastName() +"','"+ user.getemail()+"')";
 			myStmt.execute(sql);
 			System.out.println("Update DB Complete");
 		}
@@ -51,7 +60,8 @@ public class MainController {
 			exc.printStackTrace();
 		}
 		
-		ModelAndView view = new ModelAndView("Login");
+		//Change view to the User's Profile Page
+		ModelAndView view = new ModelAndView("UserPage");
 		return view;
 	}
 	
