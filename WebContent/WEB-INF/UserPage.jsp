@@ -10,7 +10,10 @@
 	<body>
 		<div class="Banner">
 			<h1>${user1.firstName} +  ${user1.lastName}</h1>
-				
+			<h3>${user1.email}</h3>
+			<form action="/FakeFaceBook/Login.html">
+				<input  value="Log Out" type="submit"/>
+			</form>	
 		</div>
 	</body>
 </html>

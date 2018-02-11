@@ -51,8 +51,12 @@ public class MainController {
 				ID = MyRs.getInt("ID");
 				System.out.println("ID in DB is: " + ID + MyRs.getString("firstName") );
 			}
+			
 			//Add user to DB with ID = ID+1
-			sql = "insert into Users (firstName, lastName, email) values ('" + user.getFirstName() +"','"+ user.getLastName() +"','"+ user.getemail()+"')";
+			sql = "insert into Users (firstName, lastName, email, ID) values ('" + 
+					user.getFirstName() +"','"+ 
+					user.getLastName() +"','"+ 
+					user.getemail() +"')";
 			myStmt.execute(sql);
 			System.out.println("Update DB Complete");
 		}
