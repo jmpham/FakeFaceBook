@@ -34,7 +34,7 @@ public class MainController {
 			System.out.println("error has occurred");
 		}
 		//Update the user class
-		System.out.println("SignUp Complete");
+		System.out.println("SignUp Processing...");
 		System.out.println("firstName: " + user.getFirstName() + " lastName:  " + user.getLastName() + " email:  " + user.getemail());
 		
 		//Update Database with New User Info
@@ -43,17 +43,8 @@ public class MainController {
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
 			Statement myStmt = myConn.createStatement();
 			
-			//Get the latest ID from the DB
-			int ID = 0;
-			String sql = "Select * from Users";
-			ResultSet MyRs = myStmt.executeQuery(sql);
-			while(MyRs.next()) {
-				ID = MyRs.getInt("ID");
-				System.out.println("ID in DB is: " + ID + MyRs.getString("firstName") );
-			}
-			
-			//Add user to DB with ID = ID+1
-			sql = "insert into Users (firstName, lastName, email, ID) values ('" + 
+			//Add user to DB 
+			String sql = "insert into Users (firstName, lastName, email) values ('" + 
 					user.getFirstName() +"','"+ 
 					user.getLastName() +"','"+ 
 					user.getemail() +"')";

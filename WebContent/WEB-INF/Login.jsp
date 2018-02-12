@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery-1.8.3.js"></script>
+ 
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Fake Facebook</title>
 		<style>
@@ -28,10 +28,10 @@
 		</form>
 		<h3>SIGN UP</h3>
 		<form action="/FakeFaceBook/signupLogin.html" method="POST">
-			<table>
-				<tr> <td>FirstName</td> <td><input type="text" name="firstName"/> </td> <td>LastName</td> <td><input type="text" name="lastName"/> </td> </tr>
-				<tr> <td>Email</td> <td><input type="text" name="email" id="email"> </td> <td>New Password</td> <td><input type="text" name="password"/> </td>  </tr>
-				<tr> <td> <input type="submit" value="SignUp"/> </td> </tr>
+			<table class="signup">
+				<tr> <td>FirstName</td> <td><input type="text" name="firstName" id="firstName"/> </td> <td>LastName</td> <td><input type="text" name="lastName" id="lastName"/> </td> </tr>
+				<tr> <td>Email</td> <td><input type="text" name="email" id="email"> </td> <td>New Password</td> <td><input type="text" name="password" id="password"/> </td>  </tr>
+				<tr> <td> <input type="submit" value="SignUp" id="signup"/> </td> </tr>
 				
 			</table>
 			
