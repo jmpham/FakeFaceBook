@@ -7,22 +7,20 @@
  
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Fake Facebook</title>
-		<style>
-		<%@ include file="Login.css" %>
-		</style>
-		<script>
-		<%@ include file="Login.js" %>
-		</script>
+		<link rel="stylesheet" href="/FakeFaceBook/resources/css/Login.css" type='text/css'/>
+		<script src="/FakeFaceBook/resources/javascript/Login.js"></script>
+		
 	</head>
 	<body>
 	
 	
 		<div class="title">
+		<img src="/FakeFaceBook/resources/images/imageFile.jpg" alt="imageFile" />
 		Fake Facebook: by Jonathan Pham
-			<form>
+		<form action="/FakeFaceBook/userPage.html">
 			<table>
-				<tr> <td>Username</td> <td><input type="text"/> </td> </tr>
-				<tr> <td>Password</td> <td><input type="text"/> </td> </tr>
+				<tr> <td>Email</td> <td><input type="text" name="emailSignIn"/> </td> </tr>
+				<tr> <td>Password</td> <td><input type="text" name="passwordSignIn"/> </td> </tr>
 				<tr> <td> <input type="submit" value="Login"/> </td> </tr>
 			</table>
 		</form>

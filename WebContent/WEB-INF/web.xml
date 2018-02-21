@@ -11,6 +11,8 @@
         </servlet-class>
   </servlet>
  
+ 
+ 
   <servlet-mapping>
  	<servlet-name>spring-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>

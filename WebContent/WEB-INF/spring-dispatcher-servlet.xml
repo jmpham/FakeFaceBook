@@ -10,14 +10,22 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+</bean>
 
   <context:component-scan base-package="com.FakeFaceBook.Controller" />
   <mvc:annotation-driven/>
+  
+ <mvc:resources mapping="/resources/**" location="/resources/" />
+
+<mvc:default-servlet-handler/>
+
+
 
   <bean id="viewResolver"
     	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">
-            <value>/WEB-INF/</value>
+            <value>/WEB-INF/views/</value>
         </property>
         <property name="suffix">
             <value>.jsp</value>
