@@ -7,8 +7,13 @@
 		
 	</head>
 	<body>
+	<script>
+	var email = ${user1.email};
+	document.getElementById('profilePicture').src = "file/" + ${user1.email} + "_ProfilePic.jpg";
+	console.log("file/" + email +  "_ProfilePic.jpg");
+	</script>
 		<div class="Banner">
-			<img src="C:\eclipse\imageFile" <c:out value='${bean.imageByteArrayString}'/>/>
+			<img id="profilePicture" alt="imageFilefile" />
 			<h1>${user1.firstName} +  ${user1.lastName}</h1>
 			<h3>${user1.email}</h3>
 			<form  action="/FakeFaceBook/uploadIMG/jon@yahoo.com" enctype="multipart/form-data" method=POST>

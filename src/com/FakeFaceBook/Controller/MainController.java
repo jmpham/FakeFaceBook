@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -130,10 +131,11 @@ public class MainController {
 	
 	//IMAGE Upload
 	@RequestMapping(value="/uploadIMG/{email}", method = RequestMethod.POST)
-	public ModelAndView uploadImageCtlr(@RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
+	public ModelAndView uploadImageCtlr(@RequestParam MultipartFile file, @PathVariable("email") String email, HttpServletRequest request) throws IOException {
 		
 		
-		String filePath = request.getServletContext().getRealPath("/images/imageFile.jpg"); 
+		//String filePath = request.getServletContext().getRealPath("/images/imageFile.jpg"); 
+		String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/images/" + email +"_ProfilePic.jpg";
 		file.transferTo(new File(filePath));
 		//try to receive file input stream. This is how server receives file data from client side. Need to buffer serialize bit stream
 		/*InputStream inputStream =  new BufferedInputStream(file.getInputStream());

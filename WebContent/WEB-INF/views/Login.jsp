@@ -15,7 +15,8 @@
 	
 	
 		<div class="title">
-		<img src="/FakeFaceBook/resources/images/imageFile.jpg" alt="imageFile" />
+		<img src="media/imageFile.jpg" alt="imageFilemedia" />
+		<img src="file/imageFile.jpg" alt="imageFilefile" />
 		Fake Facebook: by Jonathan Pham
 		<form action="/FakeFaceBook/userPage.html">
 			<table>
