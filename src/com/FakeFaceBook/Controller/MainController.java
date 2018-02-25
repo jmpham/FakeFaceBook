@@ -9,11 +9,13 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,17 +39,24 @@ import java.io.InputStream;
 import java.sql.*;
 @EnableWebMvc
 @ResponseBody
+
 @Controller
+
+@SessionAttributes("user1")
 public class MainController {
 	
+	
+	@ModelAttribute("user1")
+	public User setUpUserForm() {
+		return new User();
+	}
 	
 	
 	
 	//LOGIN SCREEN
 	@RequestMapping(value="/Login.html")
 	public ModelAndView getLoginPage(){
-		System.out.println("getting login page");
-		
+		System.out.println("getting login page: ");
 	
 		ModelAndView view = new ModelAndView("Login");
 		return view;
@@ -53,13 +64,10 @@ public class MainController {
 	
 	//SIGN UP SUBMISSION
 	@RequestMapping(value="/signupLogin.html", method = RequestMethod.POST)
-	public ModelAndView getLoginPage2(@ModelAttribute("user1") User user, BindingResult error) {
+	public ModelAndView getLoginPage2(@ModelAttribute("user1") User user) {
 		
 		//Check for errors
-		if(error.hasErrors()) {
-			ModelAndView view = new ModelAndView("Login");
-			System.out.println("error has occurred");
-		}
+		
 		//Update the user class
 		System.out.println("SignUp Processing...");
 		System.out.println("firstName: " + user.getFirstName() + " lastName:  " + user.getLastName() + " email:  " + user.getemail());
@@ -91,8 +99,8 @@ public class MainController {
 	
 	//SIGN IN
 	@RequestMapping(value="/userPage.html")
-	public ModelAndView getUserPage(@ModelAttribute("user1") User user, BindingResult error, HttpServletResponse response) {
-		
+	public ModelAndView getUserPage(@ModelAttribute("user1") User user, HttpServletRequest request) {
+		//@ModelAttribute("user1") User user
 		//Default view and emailmatch variable
 		boolean emailPasswordMatch = false;
 		ModelAndView view = new ModelAndView("Login");
@@ -106,7 +114,7 @@ public class MainController {
 		ResultSet result = myStmt.executeQuery(sql);
 		while(result.next()) {
 			System.out.println("From DataBase: " + result.getString("email"));
-			if(user.getemailSignIn().equals(result.getString("email"))) {	// '==' is to compare reference address. .equals() is comparing content
+			if(user.getemail().equals(result.getString("email"))) {	// '==' is to compare reference address. .equals() is comparing content
 				emailPasswordMatch = true;
 				view = new ModelAndView("UserPage");
 			}
@@ -115,10 +123,14 @@ public class MainController {
 		
 		//Retrieve User info from MySQL
 		sql = "Select * from Users where email = '" + user.getemail() + "'";
+		//sql = "select * from Users where email = 'coolrun@yahoo.com'";
 		result = myStmt.executeQuery(sql);
+		System.out.println("here1");
+		result.next();
+		System.out.println("here2");
 		user.setFirstName(result.getString("firstName"));
 		user.setLastName(result.getString("lastName"));
-		
+		System.out.println("here3");
 		}
 		catch(Exception exc) {
 			exc.printStackTrace();
@@ -131,11 +143,11 @@ public class MainController {
 	
 	//IMAGE Upload
 	@RequestMapping(value="/uploadIMG/{email}", method = RequestMethod.POST)
-	public ModelAndView uploadImageCtlr(@RequestParam MultipartFile file, @PathVariable("email") String email, HttpServletRequest request) throws IOException {
+	public ModelAndView uploadImageCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile file, HttpServletRequest request ) throws IOException {
 		
-		
+		System.out.println(user.getemail());
 		//String filePath = request.getServletContext().getRealPath("/images/imageFile.jpg"); 
-		String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/images/" + email +"_ProfilePic.jpg";
+		String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/images/" + user.getemail() +"_ProfilePic.jpg";
 		file.transferTo(new File(filePath));
 		//try to receive file input stream. This is how server receives file data from client side. Need to buffer serialize bit stream
 		/*InputStream inputStream =  new BufferedInputStream(file.getInputStream());
@@ -174,13 +186,13 @@ public class MainController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} */
-			
+		} 
+		*/	
 		
 		
 		
 		ModelAndView view = new ModelAndView("UserPage");
 		return view;
-	}
+	} 
 	
 }

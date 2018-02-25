@@ -8,7 +8,11 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        "
+    xmlns:aop="http://www.springframework.org/schema/aop">
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 </bean>
@@ -32,5 +36,9 @@
         </property>
  </bean>
 
+
+<bean id="user"    class="com.FakeFaceBook.Controller.User" scope="session">     
+      <aop:scoped-proxy/>
+  </bean>
 
 </beans>

@@ -7,16 +7,12 @@
 		
 	</head>
 	<body>
-	<script>
-	var email = ${user1.email};
-	document.getElementById('profilePicture').src = "file/" + ${user1.email} + "_ProfilePic.jpg";
-	console.log("file/" + email +  "_ProfilePic.jpg");
-	</script>
+	
 		<div class="Banner">
-			<img id="profilePicture" alt="imageFilefile" />
-			<h1>${user1.firstName} +  ${user1.lastName}</h1>
+			<img src="file/${user1.email}_ProfilePic.jpg" alt="imageFilefile" />
+			<h1>${user1.firstName} ${user1.lastName}</h1>
 			<h3>${user1.email}</h3>
-			<form  action="/FakeFaceBook/uploadIMG/jon@yahoo.com" enctype="multipart/form-data" method=POST>
+			<form  action="/FakeFaceBook/uploadIMG/${user1.email}" enctype="multipart/form-data" method=POST>
 				<input type="file" accept=".jpg" name="file"/>
 				<input value="Upload" type="submit" />
 			</form>

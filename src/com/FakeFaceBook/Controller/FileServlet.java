@@ -7,21 +7,35 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * The File servlet for serving from absolute path.
  * @author BalusC
  * @link http://balusc.blogspot.com/2007/07/fileservlet.html
  */
+
+
 @WebServlet("/file/*")
+@SessionAttributes("user1")
+ // N********************************
 public class FileServlet extends HttpServlet {
 
+	
+	
     // Constants ----------------------------------------------------------------------------------
 
     /**
@@ -35,6 +49,7 @@ public class FileServlet extends HttpServlet {
 
     private String filePath;
 
+    
     // Actions ------------------------------------------------------------------------------------
 
     public void init() throws ServletException {
@@ -47,9 +62,14 @@ public class FileServlet extends HttpServlet {
         // In UNIX, it is just straightforward "/files".
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+   
+    
+    public void doGet( HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {
+    	
+    	//System.out.println((String) request.getSession().getAttribute("user1"));
+    	//System.out.println(user.getemailSignIn());
         // Get requested file by path info.
         String requestedFile = request.getPathInfo();
         System.out.println(request.getPathInfo());

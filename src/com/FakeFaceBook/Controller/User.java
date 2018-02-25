@@ -2,6 +2,13 @@ package com.FakeFaceBook.Controller;
 
 import java.util.ArrayList;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+
+//Scope the Objects ,for example you have user object that want be in session every time:
+
+
 public class User {
 	private String emailSignIn;
 	private String passwordSignIn;
@@ -15,6 +22,9 @@ public class User {
 	private ArrayList<String> skills;
 	private boolean validEmail;		
 	
+	User(){
+		this.firstName = "jony";
+	}
 	
 	public String getemailSignIn() {
 		return emailSignIn;

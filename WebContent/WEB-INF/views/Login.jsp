@@ -15,13 +15,12 @@
 	
 	
 		<div class="title">
-		<img src="media/imageFile.jpg" alt="imageFilemedia" />
 		<img src="file/imageFile.jpg" alt="imageFilefile" />
 		Fake Facebook: by Jonathan Pham
 		<form action="/FakeFaceBook/userPage.html">
 			<table>
-				<tr> <td>Email</td> <td><input type="text" name="emailSignIn"/> </td> </tr>
-				<tr> <td>Password</td> <td><input type="text" name="passwordSignIn"/> </td> </tr>
+				<tr> <td>Email</td> <td><input type="text" name="email"/> </td> </tr>
+				<tr> <td>Password</td> <td><input type="text" name="password"/> </td> </tr>
 				<tr> <td> <input type="submit" value="Login"/> </td> </tr>
 			</table>
 		</form>
