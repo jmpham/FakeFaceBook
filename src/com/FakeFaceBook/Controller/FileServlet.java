@@ -22,12 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-/**
- * The File servlet for serving from absolute path.
- * @author BalusC
- * @link http://balusc.blogspot.com/2007/07/fileservlet.html
- */
-
 
 @WebServlet("/file/*")
 @SessionAttributes("user1")
@@ -57,9 +51,6 @@ public class FileServlet extends HttpServlet {
         // Define base path somehow. You can define it as init-param of the servlet.
         this.filePath = "C:\\Users\\Jonathan\\Desktop\\Eclipse-Workspace\\FakeFaceBook\\resources\\images";
         System.out.println(filePath);
-        // In a Windows environment with the Applicationserver running on the
-        // c: volume, the above path is exactly the same as "c:\files".
-        // In UNIX, it is just straightforward "/files".
     }
 
    
@@ -68,8 +59,6 @@ public class FileServlet extends HttpServlet {
         throws ServletException, IOException
     {
     	
-    	//System.out.println((String) request.getSession().getAttribute("user1"));
-    	//System.out.println(user.getemailSignIn());
         // Get requested file by path info.
         String requestedFile = request.getPathInfo();
         System.out.println(request.getPathInfo());

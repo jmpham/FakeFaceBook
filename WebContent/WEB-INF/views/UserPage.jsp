@@ -12,9 +12,18 @@
 			<img src="file/${user1.email}_ProfilePic.jpg" alt="imageFilefile" />
 			<h1>${user1.firstName} ${user1.lastName}</h1>
 			<h3>${user1.email}</h3>
-			<form  action="/FakeFaceBook/uploadIMG/${user1.email}" enctype="multipart/form-data" method=POST>
+			<embed src="file/${user1.email}_Resume.pdf" width="500" height="375" type='application/pdf'>
+			<form action="/FakeFaceBook/uploadStatus/" enctype="multipart/form-data" method=POST>
+				<input type="text" name="status" maxlength = "255">
+				<input value="Upload Status" type="submit" />
+			</form>
+			<form action="/FakeFaceBook/uploadResume/" enctype="multipart/form-data" method=POST>
+				<input type="file" accept=".pdf" name="resume"/>
+				<input value="Upload Resume" type="submit" />
+			</form>
+			<form  action="/FakeFaceBook/uploadIMG/" enctype="multipart/form-data" method=POST>
 				<input type="file" accept=".jpg" name="file"/>
-				<input value="Upload" type="submit" />
+				<input value="Upload Profile Picture" type="submit"  />
 			</form>
 			<form action="/FakeFaceBook/Login.html">
 				<input  value="Log Out" type="submit"/>

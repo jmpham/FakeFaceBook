@@ -36,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.*;
 @EnableWebMvc
 @ResponseBody
@@ -142,57 +143,50 @@ public class MainController {
 	}
 	
 	//IMAGE Upload
-	@RequestMapping(value="/uploadIMG/{email}", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadIMG/", method = RequestMethod.POST)
 	public ModelAndView uploadImageCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile file, HttpServletRequest request ) throws IOException {
 		
-		System.out.println(user.getemail());
-		//String filePath = request.getServletContext().getRealPath("/images/imageFile.jpg"); 
+		//Establish filepath from local machine to store image
 		String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/images/" + user.getemail() +"_ProfilePic.jpg";
 		file.transferTo(new File(filePath));
-		//try to receive file input stream. This is how server receives file data from client side. Need to buffer serialize bit stream
-		/*InputStream inputStream =  new BufferedInputStream(file.getInputStream());
-		File imageFile = new File("\\imageFile.jpg");
-		@SuppressWarnings("resource")
-		FileOutputStream output = new FileOutputStream(imageFile);
-		byte[] buffer = new byte[1024];
-		while (inputStream.read( buffer) > 0) {
-			output.write(buffer);
-		}
+		System.out.println("\nUploading Profile Picture Complete");		
+		ModelAndView view = new ModelAndView("UserPage");
+		return view;
+	}
+	
+	//Status upload
+	@RequestMapping(value="/uploadStatus/", method = RequestMethod.POST)
+	public ModelAndView uploadStatusCtlr(@SessionAttribute("user1") User user, @RequestParam String status, HttpServletRequest request ) throws IOException {
 		
-		System.out.println("\nSaved to file: " + imageFile.getAbsolutePath());
-		
-		if (inputStream != null) {
-			inputStream.close();
-		}
-		if(output != null) {
-			output.close();
-		}*/
-		/*try {
-			InputStream inputStream =  new BufferedInputStream(file.getInputStream());
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection myConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
-				
-				String sql = "update Users set profile_pic=? where email='jon@yahoo.com'";
-				PreparedStatement myStmt = myConn.prepareStatement(sql);
-				myStmt.setBinaryStream(1, inputStream);
-				
-				myStmt.executeUpdate(); //DO NOT ADD SQL TO THE PARAMETER. Does not work for 'PreparedStatements'
-				System.out.println("Update DB Complete");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+			Statement myStmt = MyConn.createStatement();
+			String sql = "UPDATE Users set status = '" + status + "'where email='" + user.getemail() +"'";
+			System.out.println(sql);
+			myStmt.executeUpdate(sql);
+			System.out.println("updating status complete: "+ status);
 			}
 			catch(Exception exc) {
 				exc.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		*/	
 		
-		
-		
+		//System.out.println("\nUploading Status Complete: " + status);		
 		ModelAndView view = new ModelAndView("UserPage");
 		return view;
-	} 
+	}
+	
+	//Resume Upload
+		@RequestMapping(value="/uploadResume/", method = RequestMethod.POST)
+		public ModelAndView uploadResumeCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile resume, HttpServletRequest request ) throws IOException {
+			
+			//Establish filepath from local machine to store image
+			String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/status/" + user.getemail() +"_Resume.pdf";
+			resume.transferTo(new File(filePath));
+			System.out.println("\nUploading Resume Complete: ");		
+			ModelAndView view = new ModelAndView("UserPage");
+			return view;
+		}
+	
 	
 }
