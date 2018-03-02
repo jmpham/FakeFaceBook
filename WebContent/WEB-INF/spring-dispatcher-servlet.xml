@@ -20,7 +20,7 @@
   <context:component-scan base-package="com.FakeFaceBook.Controller" />
   <mvc:annotation-driven/>
   
- <mvc:resources mapping="/resources/**" location="/resources/" />
+ <mvc:resources mapping="/staticResources/**" location="/staticResources/" />
 
 <mvc:default-servlet-handler/>
 
