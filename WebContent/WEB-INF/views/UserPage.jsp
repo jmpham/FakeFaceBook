@@ -17,6 +17,10 @@
 				<input type="text" name="status" maxlength = "255">
 				<input value="Upload Status" type="submit" />
 			</form>
+			<form action="/FakeFaceBook/search" method=GET>
+				<input type="text" name="profile" >
+				<input value="Search Profiles" type="submit">
+			</form>
 			<form action="/FakeFaceBook/uploadResume/" enctype="multipart/form-data" method=POST>
 				<input type="file" accept=".pdf" name="resume"/>
 				<input value="Upload Resume" type="submit" />
@@ -25,9 +29,10 @@
 				<input type="file" accept=".jpg" name="file"/>
 				<input value="Upload Profile Picture" type="submit"  />
 			</form>
-			<form action="/FakeFaceBook/Login.html">
+			<form action="/FakeFaceBook/Logout">
 				<input  value="Log Out" type="submit"/>
 			</form>	
+			
 		</div>
 	</body>
 </html>

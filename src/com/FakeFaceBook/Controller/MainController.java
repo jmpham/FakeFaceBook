@@ -1,9 +1,11 @@
 package com.FakeFaceBook.Controller;
 import java.sql.Connection;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,7 +49,7 @@ import java.sql.*;
 @SessionAttributes("user1")
 public class MainController {
 	
-	
+	//This is automically called first if a servlet doesn't have a modelattribute in it's parameter, or if the attribute hasn't been set
 	@ModelAttribute("user1")
 	public User setUpUserForm() {
 		return new User();
@@ -55,13 +58,61 @@ public class MainController {
 	
 	
 	//LOGIN SCREEN
-	@RequestMapping(value="/Login.html")
+	@RequestMapping(value="/")
 	public ModelAndView getLoginPage(){
-		System.out.println("getting login page: ");
-	
+		System.out.println("getting login page: " );
+		
 		ModelAndView view = new ModelAndView("Login");
 		return view;
 	}
+	
+	//LOGOUT Request
+	@RequestMapping(value="/Logout")
+	public void getLogoutPage(SessionStatus status, HttpServletResponse response) throws IOException {
+		//end the current session when logging out
+		status.setComplete();
+		System.out.println("\nLogging out");
+		//NEED TO REDIRECT TO LOGIN SERVLET. SESSION ATTRIBUTES STILL STICKY FOR THIS REQUEST UNTIL THE NEXT
+		response.sendRedirect("/FakeFaceBook/");
+	}
+	
+	//BACK TO USERPAGE SCREEN
+		@RequestMapping(value="/UserPage")
+		public ModelAndView getUserPage(){
+			System.out.println("\nGoing Back Home: " );
+			
+			ModelAndView view = new ModelAndView("UserPage");
+			return view;
+		}
+	
+	//SEARCH PROFILES Request
+		@RequestMapping(value="/search")
+		public ModelAndView getProfile(@ModelAttribute("user2") User user2, @RequestParam String profile) throws IOException {
+			
+			System.out.println("\nFinding Profile: " + profile);
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+				Statement MyStmt = MyConn.createStatement();
+				String sql = "select * from Users";
+				ResultSet result = MyStmt.executeQuery(sql);
+				while(result.next()) {
+					if(result.getString("email").equals(profile)) {
+						user2.setEmail(result.getString("email"));
+						user2.setFirstName(result.getString("firstName"));
+						user2.setLastName(result.getString("lastName"));
+						break;
+					}
+				}
+				
+			}
+			catch(Exception exc){
+				exc.printStackTrace();
+			}
+			
+			ModelAndView view = new ModelAndView("FriendPage");
+			return view;
+		}
 	
 	//SIGN UP SUBMISSION
 	@RequestMapping(value="/signupLogin.html", method = RequestMethod.POST)
@@ -73,7 +124,7 @@ public class MainController {
 		System.out.println("SignUp Processing...");
 		System.out.println("firstName: " + user.getFirstName() + " lastName:  " + user.getLastName() + " email:  " + user.getemail());
 		
-		//Update Database with New User Info
+		//Update Database with New User Info. Email validation checked via Javascript API call.
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
@@ -99,12 +150,14 @@ public class MainController {
 	
 	
 	//SIGN IN
+	@SuppressWarnings("resource")
 	@RequestMapping(value="/userPage.html")
 	public ModelAndView getUserPage(@ModelAttribute("user1") User user, HttpServletRequest request) {
-		//@ModelAttribute("user1") User user
-		//Default view and emailmatch variable
+	
+		//Default view emailmatch variable
 		boolean emailPasswordMatch = false;
 		ModelAndView view = new ModelAndView("Login");
+		user.setinvalidCreds("");
 		
 		//Try to find user email and password in DB.
 		try {
@@ -115,23 +168,26 @@ public class MainController {
 		ResultSet result = myStmt.executeQuery(sql);
 		while(result.next()) {
 			System.out.println("From DataBase: " + result.getString("email"));
-			if(user.getemail().equals(result.getString("email"))) {	// '==' is to compare reference address. .equals() is comparing content
+			if(user.getemail().equals(result.getString("email")))  {	// '==' is to compare reference address. .equals() is comparing content
+				if(user.getPassword().equals(result.getString("password"))){
 				emailPasswordMatch = true;
+				//Retrieve User info from MySQL
+				sql = "Select * from Users where email = '" + user.getemail() + "'";
+				result = myStmt.executeQuery(sql);
+				result.next();
+				user.setFirstName(result.getString("firstName"));
+				user.setLastName(result.getString("lastName"));
 				view = new ModelAndView("UserPage");
+				}
+			}
+			else {
+				user.setinvalidCreds("Invalid Email or Password");
 			}
 		}
+		result.close();
 		System.out.println("the email entered is matched: " + emailPasswordMatch);
 		
-		//Retrieve User info from MySQL
-		sql = "Select * from Users where email = '" + user.getemail() + "'";
-		//sql = "select * from Users where email = 'coolrun@yahoo.com'";
-		result = myStmt.executeQuery(sql);
-		System.out.println("here1");
-		result.next();
-		System.out.println("here2");
-		user.setFirstName(result.getString("firstName"));
-		user.setLastName(result.getString("lastName"));
-		System.out.println("here3");
+		
 		}
 		catch(Exception exc) {
 			exc.printStackTrace();

@@ -13,7 +13,7 @@ $(document).ready(function(){
 		$.ajax({
 			// need 'http://' in the beginning or else internet browser will complain. Need to use http protocol to talk
 			// need '/api/ at the end because .com will be interpreted literally
-			url: "http://localhost:8080/FakeFaceBook/post-validate-email/" + email+"/api", 
+			url: "http://ec2-13-59-193-16.us-east-2.compute.amazonaws.com:8080/FakeFaceBook/post-validate-email/" + email+"/api", 
 			type: "GET",
 			dataType: "json",
 			success: function(result){

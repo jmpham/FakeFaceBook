@@ -10,33 +10,25 @@ import org.springframework.stereotype.Component;
 
 
 public class User {
-	private String emailSignIn;
-	private String passwordSignIn;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
-	private String profilePicFileName;
 	private String Status;
 	private String Accomplishments;
 	private ArrayList<String> skills;
 	private boolean validEmail;		
+	private String invalidCreds;
 	
 	User(){
-		this.firstName = "jony";
+		this.invalidCreds = "";
 	}
 	
-	public String getemailSignIn() {
-		return emailSignIn;
+	public String getPassword() {
+		return password;
 	}
-	public void setemailSignIn(String emailSignIn) {
-		this.emailSignIn = emailSignIn;
-	}
-	public String getpasswordSignIn() {
-		return passwordSignIn;
-	}
-	public void setpasswordSignIn(String passwordSignIn) {
-		this.passwordSignIn = passwordSignIn;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -59,10 +51,10 @@ public class User {
 	public boolean getValidEmail() {
 		return validEmail;
 	}
-	public void setProfilePicFileName(String fileName) {
-		this.profilePicFileName = fileName;
+	public void setinvalidCreds(String cred) {
+		this.invalidCreds = cred;
 	}
-	public String getProfilePicFileName() {
-		return profilePicFileName;
+	public String getinvalidCreds() {
+		return invalidCreds;
 	}
 }
