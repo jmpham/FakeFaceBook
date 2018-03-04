@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @WebServlet("/file/*")
 @SessionAttributes("user1")
- // N********************************
+
 public class FileServlet extends HttpServlet {
 
 	
@@ -49,7 +49,8 @@ public class FileServlet extends HttpServlet {
     public void init() throws ServletException {
 
         // Define base path somehow. You can define it as init-param of the servlet.
-        this.filePath = "C:\\Users\\Jonathan\\Desktop\\Eclipse-Workspace\\FakeFaceBook\\resources\\images";
+        this.filePath = "C:\\Users\\Jonathan\\Desktop\\Eclipse-Workspace\\FakeFaceBook\\resources\\files";
+    	//this.filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files"; // Linux Server Path
         System.out.println(filePath);
     }
 

@@ -200,17 +200,33 @@ public class MainController {
 	
 	//IMAGE Upload
 	@RequestMapping(value="/uploadIMG/", method = RequestMethod.POST)
-	public ModelAndView uploadImageCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile file, HttpServletRequest request ) throws IOException {
+	public void uploadImageCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile file, HttpServletResponse response ) throws IOException {
 		
 		//Establish filepath from local machine to store image
-		String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/images/" + user.getemail() +"_ProfilePic.jpg";
+		//String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/files/" + user.getemail() +"_ProfilePic.jpg";
+		String filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files/" + user.getemail() +"_ProfilePic.jpg"; //Linux
 		file.transferTo(new File(filePath));
 		System.out.println("\nUploading Profile Picture Complete");		
-		ModelAndView view = new ModelAndView("UserPage");
-		return view;
+		//ModelAndView view = new ModelAndView("UserPage");
+		//return view;
+		response.sendRedirect("/FakeFaceBook/UserPage");
 	}
+
+	//BANNER PICTURE Upload
+		@RequestMapping(value="/uploadBannerPic/", method = RequestMethod.POST)
+		public void uploadBanner(@SessionAttribute("user1") User user, @RequestParam MultipartFile file, HttpServletResponse response ) throws IOException {
+			
+			//Establish filepath from local machine to store image
+			//String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/files/" + user.getemail() +"_BannerPic.jpg";
+			String filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files/" + user.getemail() +"_BannerPic.jpg"; //Linux
+			file.transferTo(new File(filePath));
+			System.out.println("\nUploading Banner Picture Complete");		
+			//ModelAndView view = new ModelAndView("UserPage");
+			//return view;
+			response.sendRedirect("/FakeFaceBook/UserPage");
+		}
 	
-	//Status upload
+	//Status Upload
 	@RequestMapping(value="/uploadStatus/", method = RequestMethod.POST)
 	public ModelAndView uploadStatusCtlr(@SessionAttribute("user1") User user, @RequestParam String status, HttpServletRequest request ) throws IOException {
 		
@@ -234,14 +250,16 @@ public class MainController {
 	
 	//Resume Upload
 		@RequestMapping(value="/uploadResume/", method = RequestMethod.POST)
-		public ModelAndView uploadResumeCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile resume, HttpServletRequest request ) throws IOException {
+		public void uploadResumeCtlr(@SessionAttribute("user1") User user, @RequestParam MultipartFile resume, HttpServletResponse response ) throws IOException {
 			
 			//Establish filepath from local machine to store image
-			String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/status/" + user.getemail() +"_Resume.pdf";
+			//String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/files/" + user.getemail() +"_Resume.pdf"; 
+			String filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files/" + user.getemail() +"_Resume.jpg"; //Linux
 			resume.transferTo(new File(filePath));
 			System.out.println("\nUploading Resume Complete: ");		
-			ModelAndView view = new ModelAndView("UserPage");
-			return view;
+			//ModelAndView view = new ModelAndView("UserPage");
+			//return view;
+			response.sendRedirect("/FakeFaceBook/UserPage");
 		}
 	
 	

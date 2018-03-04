@@ -4,27 +4,35 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>User's Page</title>
+		<link rel="stylesheet" href="/FakeFaceBook/staticResources/css/FriendPage.css" type='text/css'/>
 		
 	</head>
 	<body>
-	
 		<div class="Banner">
-			<img src="file/${user2.email}_ProfilePic.jpg" alt="imageFilefile" />
+			<img src="file/${user2.email}_BannerPic.jpg" id="bannerpic"/>
+		</div>
+		<div class="main">
+			<img src="file/${user2.email}_ProfilePic.jpg" id="profilePic"/>
 			<h1>${user2.firstName} ${user2.lastName}</h1>
 			<h3>${user2.email}</h3>
-			<embed src="file/${user2.email}_Resume.pdf" width="500" height="375" type='application/pdf'>
 			
+			<!-- Need to understand why need object tags. Also, Google Chrome needs PDF Viewer Extension for this to work -->
+			<object data="file/${user2.email}_Resume.pdf"  type="application/pdf" width="75%" height="750">
+				<embed src="file/${user2.email}_Resume.pdf" type="application/pdf">
+			</object>
+		</div>
+		<div id="forms">	
 			<form action="/FakeFaceBook/search" method=GET>
 				<input type="text" name="profile" >
-				<input value="Search Profiles" type="submit">
+				<input value="Search Profiles by Email" type="submit" class="btn">
 			</form>
-			<form action="/FakeFaceBook/UserPage">
-				<input value="Go Back to UserPage" type="submit">
+			<form  action="/FakeFaceBook/Userpage" enctype="multipart/form-data" method=POST>
+				<input type="file" accept=".jpg" name="file" style="color: #e8ecf2"/>
+				<input value="Go Back to UserPage" type="submit"  class="btn"/>
 			</form>
 			<form action="/FakeFaceBook/Logout">
-				<input  value="Log Out" type="submit"/>
-			</form>	
-			
-		</div>
+				<input  value="Log Out" type="submit" class="btn"/>
+			</form>
+		</div>	
 	</body>
 </html>

@@ -12,40 +12,34 @@
 		
 	</head>
 	<body>
-		
 		<div class="frontpage">
-			
-			<div class="banner">
-				<h1>V A L H A L L A</h1>
-				<h5>By: Jonathan Pham</h5>
-			</div>	
-				
-				
-			
-		<div class = "forms">
-			<form action="/FakeFaceBook/userPage.html">
-				<table>
-					<tr> <td>Email</td> <td><input type="text" name="email"/> </td> </tr>
-					<tr> <td>Password</td> <td><input type="text" name="password"/> </td> </tr>
-					<tr> <td>${user1.invalidCreds}<td></tr>
-					<tr> <td> <input type="submit" value="Login" class="button"/> </td> </tr>
-				</table>
-			</form>
-			<h3>SIGN UP</h3>
-			<form action="/FakeFaceBook/signupLogin.html" method="POST">
-				<table class="signup">
-					<tr> <td>FirstName</td> <td><input type="text" name="firstName" id="firstName"/> </td> <td>LastName</td> <td><input type="text" name="lastName" id="lastName"/> </td> </tr>
-					<tr> <td>Email</td> <td><input type="text" name="email" id="email"> </td> <td>New Password</td> <td><input type="text" name="password" id="password"/> </td>  </tr>
-					<tr> <td> <input type="submit" value="SignUp" id="signup" class="button"/> </td> </tr>
-					
-				</table>
-				
-				<div id="emailResult" >
+			<div class="grid-container">
+  				<div class="forms">
+  					<h4>SIGN IN</h4>
+					<form action="/FakeFaceBook/userPage.html" class="a">
+						<table>
+							<tr> <td>Email</td> <td><input type="text" name="email"/> </td> </tr>
+							<tr> <td>Password</td> <td><input type="text" name="password"/> </td> </tr>
+							<tr> <td> <input type="submit" value="Login" class="button"/> </td> </tr>
+							<tr> <td>${user1.invalidCreds}<td></tr>
+						</table>
+					</form>
+  				</div>
+				<div class="forms">
+				  	<form action="/FakeFaceBook/signupLogin.html" method="POST" class="signup">
+						<h4>SIGN UP</h4>
+						<table id="table2">
+							<tr> <td>FirstName</td> <td><input type="text" name="firstName" id="firstName"/> </td> <td>LastName</td> <td><input type="text" name="lastName" id="lastName"/> </td> </tr>
+							<tr> <td>Email</td> <td><input type="text" name="email" id="email"> </td> <td>New Password</td> <td><input type="text" name="password" id="password"/> </td>  </tr>
+							<tr> <td> <input type="submit" value="SignUp" id="signupbtn" class="button"/> </td> </tr>	
+						</table>			
+					</form>	
+					<input class="Availability" type="submit" value="Check Availability" id="check"/>
 				</div>
-			</form>	
-			<input class="Availability" type="submit" value="Check Availability" class="button"/>
-		</div>
-			
+  				<div class="banner"><h1>V A L H A L L A</h1></div>
+  				<div class="subtitle"><h6>A PLACE WHERE YOU AND YOUR FRIENDS CAN SHARE YOUR ACCOMPLISHMENTS</h6>
+				<h5>By: Jonathan Pham</h5></div> 
+			</div>	
 		</div>
 	</body>
 </html>

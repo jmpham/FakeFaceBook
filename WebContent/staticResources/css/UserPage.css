@@ -1,0 +1,51 @@
+body{
+	background-color: #1d1d1e; /*matte black*/
+	padding: 1px;
+
+margin: 0px;
+}
+
+.Banner{
+width: 100%;
+height: 400px;
+}
+
+#bannerpic{
+	object-fit:cover;
+	width:100%;
+	height:100%;
+}
+
+.main{
+	padding: 1px;
+	margin: 500px, auto;
+	text-align: center;
+	color: #e8ecf2;  /* white */
+}
+
+#profilePic{
+	background-size: contain;
+	height: 200px; 
+	width: 200px;
+}
+
+ #forms{
+	text-align: left;
+	margin: 0 auto;
+	position: relative;
+	left: 40%;
+	margin: 100px auto;
+}
+
+.btn{
+	  background-color: #2A496D; /*navy*/
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    margin: 5px;
+}

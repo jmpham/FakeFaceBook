@@ -4,35 +4,44 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>User's Page</title>
+		<link rel="stylesheet" href="/FakeFaceBook/staticResources/css/UserPage.css" type='text/css'/>
 		
 	</head>
 	<body>
-	
+	 
 		<div class="Banner">
-			<img src="file/${user1.email}_ProfilePic.jpg" alt="imageFilefile" />
+			<img src="file/${user1.email}_BannerPic.jpg" id="bannerpic"/>
+		</div>
+		<div class="main">
+			<img src="file/${user1.email}_ProfilePic.jpg" id="profilePic"/>
 			<h1>${user1.firstName} ${user1.lastName}</h1>
 			<h3>${user1.email}</h3>
-			<embed src="file/${user1.email}_Resume.pdf" width="500" height="375" type='application/pdf'>
-			<form action="/FakeFaceBook/uploadStatus/" enctype="multipart/form-data" method=POST>
-				<input type="text" name="status" maxlength = "255">
-				<input value="Upload Status" type="submit" />
-			</form>
+			
+			<!-- Need to understand why need object tags. Also, Google Chrome needs PDF Viewer Extension for this to work -->
+			<object data="file/${user1.email}_Resume.pdf"  type="application/pdf" width="75%" height="750">
+				<embed src="file/${user1.email}_Resume.pdf" type="application/pdf">
+			</object>
+		</div>
+		<div id="forms">	
 			<form action="/FakeFaceBook/search" method=GET>
 				<input type="text" name="profile" >
-				<input value="Search Profiles" type="submit">
+				<input value="Search Profiles by Email" type="submit" class="btn">
 			</form>
 			<form action="/FakeFaceBook/uploadResume/" enctype="multipart/form-data" method=POST>
-				<input type="file" accept=".pdf" name="resume"/>
-				<input value="Upload Resume" type="submit" />
+				<input type="file" accept=".pdf" name="resume" style="color: #e8ecf2"/>
+				<input value="Upload Resume" type="submit" class="btn"/>
 			</form>
 			<form  action="/FakeFaceBook/uploadIMG/" enctype="multipart/form-data" method=POST>
-				<input type="file" accept=".jpg" name="file"/>
-				<input value="Upload Profile Picture" type="submit"  />
+				<input type="file" accept=".jpg" name="file" style="color: #e8ecf2"/>
+				<input value="Upload Profile Picture" type="submit"  class="btn"/>
+			</form>
+			<form  action="/FakeFaceBook/uploadBannerPic/" enctype="multipart/form-data" method=POST>
+				<input type="file" accept=".jpg" name="file" style="color: #e8ecf2"/>
+				<input value="Upload Banner Picture" type="submit"  class="btn"/>
 			</form>
 			<form action="/FakeFaceBook/Logout">
-				<input  value="Log Out" type="submit"/>
-			</form>	
-			
-		</div>
+				<input  value="Log Out" type="submit" class="btn"/>
+			</form>
+		</div>	
 	</body>
 </html>

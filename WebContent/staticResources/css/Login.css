@@ -3,6 +3,30 @@
 body{
 	margin: 0;
 	padding: 1px;
+	background-color: #0E1434;
+}
+
+.banner {
+  grid-area: banner1;
+}
+
+.subtitle {
+  grid-area: subtitle1;
+}
+
+.grid-container {
+	margin: 0px 25%;
+  display: grid;
+  grid-template:
+    '. .'
+    'banner1 banner1'
+    'subtitle1 subtitle1';
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.grid-container>div {
+padding:10px 0; 
 }
 
 .banner{
@@ -10,51 +34,68 @@ body{
 	color: 	#2A496D;
 	margin: 0;
 	padding: 1px;
-	font-size: 150%;
+	font-size: 175%;
 	font-family: Arial, sans-serif;
-	top: 150px;
-	position: relative;
+	
+}
+
+.subtitle{
+	text-align: center;
+	color: 	#2A496D;
+	margin: 0;
+	padding: 1px;
+	font-family: Arial, sans-serif;
+	
 }
 
 .frontpage{
-	background-image: url("/FakeFaceBook/staticResources/StaticImages/FrontPagePicture.jpg"); 
-	background-color: #0E1434;
-	height: 1000px;
-	padding: 1px;
-	margin: 0;
-	background-repeat: no-repeat;
-	background-size: contain;
+	
+	background: url("/FakeFaceBook/staticResources/StaticImages/FrontPagePicture.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1500px;
 }
 
 .forms{
-	margin: 200px, auto;
+	margin: 50px, auto;
 	color: 	#2A496D;
-	position:relative;
-	padding: 1px;
-	left: 40%;
-	top: 200px;
-	font-weight: bold;
+	
+	font-weight: normal;
 	font-family: Arial, sans-serif;
+	padding: 0px;
+}
+
+.signup{
+	position: relative;
+	
 }
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #2A496D; /* Green */
     border: none;
     color: white;
-    padding: 7px 32px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
 
+
+
 .Availability{
-	  background-color: #4CAF50; /* Green */
+	  background-color: #2A496D; 
     border: none;
     color: white;
-    padding: 7px 32px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    position: relative;
+    left: 150px;
+    bottom: 28px;
 }
+
