@@ -133,7 +133,7 @@ public class MainController {
 			Statement myStmt = MyConn.createStatement();
 			
 			//Add user to DB 
-			String sql = "insert into Users (firstName, lastName, email, password) values ('" + 
+			String sql = "insert into Users (firstName, lastName, password, email) values ('" + 
 					user.getFirstName() +"','"+ 
 					user.getLastName() +"','"+
 					user.getPassword() +"','"+
