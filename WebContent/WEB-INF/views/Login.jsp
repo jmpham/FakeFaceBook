@@ -7,8 +7,8 @@
  
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Fake Facebook</title>
-		<link rel="stylesheet" href="/FakeFaceBook/staticResources/css/Login.css" type='text/css'/>
-		<script src="/FakeFaceBook/staticResources/javascript/Login.js"></script>
+		<link rel="stylesheet" href="/Valhalla/staticResources/css/Login.css" type='text/css'/>
+		<script src="/Valhalla/staticResources/javascript/Login.js"></script>
 		
 	</head>
 	<body>
@@ -16,7 +16,7 @@
 			<div class="grid-container">
   				<div class="forms">
   					<h4>SIGN IN</h4>
-					<form action="/FakeFaceBook/userPage.html" class="a">
+					<form action="/Valhalla/userPage.html" class="a">
 						<table>
 							<tr> <td>Email</td> <td><input type="text" name="email"/> </td> </tr>
 							<tr> <td>Password</td> <td><input type="text" name="password"/> </td> </tr>
@@ -26,7 +26,7 @@
 					</form>
   				</div>
 				<div class="forms">
-				  	<form action="/FakeFaceBook/signupLogin.html" method="POST" class="signup">
+				  	<form action="/Valhalla/signupLogin.html" method="POST" class="signup">
 						<h4>SIGN UP</h4>
 						<table id="table2">
 							<tr> <td>FirstName</td> <td><input type="text" name="firstName" id="firstName"/> </td> <td>LastName</td> <td><input type="text" name="lastName" id="lastName"/> </td> </tr>

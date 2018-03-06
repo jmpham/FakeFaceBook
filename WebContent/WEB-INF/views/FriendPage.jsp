@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>User's Page</title>
-		<link rel="stylesheet" href="/FakeFaceBook/staticResources/css/FriendPage.css" type='text/css'/>
+		<link rel="stylesheet" href="/Valhalla/staticResources/css/FriendPage.css" type='text/css'/>
 		
 	</head>
 	<body>
@@ -22,15 +22,15 @@
 			</object>
 		</div>
 		<div id="forms">	
-			<form action="/FakeFaceBook/search" method=GET>
+			<form action="/Valhalla/search" method=GET>
 				<input type="text" name="profile" >
 				<input value="Search Profiles by Email" type="submit" class="btn">
 			</form>
-			<form  action="/FakeFaceBook/Userpage" enctype="multipart/form-data" method=POST>
+			<form  action="/Valhalla/Userpage" enctype="multipart/form-data" method=POST>
 				<input type="file" accept=".jpg" name="file" style="color: #e8ecf2"/>
 				<input value="Go Back to UserPage" type="submit"  class="btn"/>
 			</form>
-			<form action="/FakeFaceBook/Logout">
+			<form action="/Valhalla/Logout">
 				<input  value="Log Out" type="submit" class="btn"/>
 			</form>
 		</div>	

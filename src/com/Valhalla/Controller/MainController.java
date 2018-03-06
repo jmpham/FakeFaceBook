@@ -1,4 +1,4 @@
-package com.FakeFaceBook.Controller;
+package com.Valhalla.Controller;
 import java.sql.Connection;
 import java.util.concurrent.TimeUnit;
 
@@ -73,7 +73,7 @@ public class MainController {
 		status.setComplete();
 		System.out.println("\nLogging out");
 		//NEED TO REDIRECT TO LOGIN SERVLET. SESSION ATTRIBUTES STILL STICKY FOR THIS REQUEST UNTIL THE NEXT
-		response.sendRedirect("/FakeFaceBook/");
+		response.sendRedirect("/Valhalla/");
 	}
 	
 	//BACK TO USERPAGE SCREEN
@@ -92,7 +92,8 @@ public class MainController {
 			System.out.println("\nFinding Profile: " + profile);
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+				//Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+				Connection MyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Valhalla", "jmpham21", "Christine1!"); // Linux
 				Statement MyStmt = MyConn.createStatement();
 				String sql = "select * from Users";
 				ResultSet result = MyStmt.executeQuery(sql);
@@ -127,13 +128,15 @@ public class MainController {
 		//Update Database with New User Info. Email validation checked via Javascript API call.
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
-			Statement myStmt = myConn.createStatement();
+			//Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+			Connection MyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Valhalla", "jmpham21", "Christine1!"); // Linux
+			Statement myStmt = MyConn.createStatement();
 			
 			//Add user to DB 
-			String sql = "insert into Users (firstName, lastName, email) values ('" + 
+			String sql = "insert into Users (firstName, lastName, email, password) values ('" + 
 					user.getFirstName() +"','"+ 
-					user.getLastName() +"','"+ 
+					user.getLastName() +"','"+
+					user.getPassword() +"','"+
 					user.getemail() +"')";
 			myStmt.execute(sql);
 			System.out.println("Update DB Complete");
@@ -159,10 +162,13 @@ public class MainController {
 		ModelAndView view = new ModelAndView("Login");
 		user.setinvalidCreds("");
 		
+		
+		
 		//Try to find user email and password in DB.
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+		//Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+		Connection MyConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Valhalla", "jmpham21", "Christine1!"); // Linux
 		Statement myStmt = MyConn.createStatement();
 		String sql = "Select * from Users";
 		ResultSet result = myStmt.executeQuery(sql);
@@ -193,8 +199,10 @@ public class MainController {
 			exc.printStackTrace();
 		}
 		
-		
-		
+		//**************DELETE AFTER TESTING ON AWS
+		//user.setFirstName("test");
+		//user.setLastName("test2");
+		//view = new ModelAndView("UserPage");
 		return view;
 	}
 	
@@ -204,12 +212,12 @@ public class MainController {
 		
 		//Establish filepath from local machine to store image
 		//String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/files/" + user.getemail() +"_ProfilePic.jpg";
-		String filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files/" + user.getemail() +"_ProfilePic.jpg"; //Linux
+		String filePath = "/home/ec2-user/apache-tomcat-9.0.2/Valhalla/resources/" + user.getemail() +"_ProfilePic.jpg"; //Linux
 		file.transferTo(new File(filePath));
 		System.out.println("\nUploading Profile Picture Complete");		
 		//ModelAndView view = new ModelAndView("UserPage");
 		//return view;
-		response.sendRedirect("/FakeFaceBook/UserPage");
+		response.sendRedirect("/Valhalla/UserPage");
 	}
 
 	//BANNER PICTURE Upload
@@ -218,12 +226,12 @@ public class MainController {
 			
 			//Establish filepath from local machine to store image
 			//String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/files/" + user.getemail() +"_BannerPic.jpg";
-			String filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files/" + user.getemail() +"_BannerPic.jpg"; //Linux
+			String filePath = "/home/ec2-user/apache-tomcat-9.0.2/Valhalla/resources/" + user.getemail() +"_BannerPic.jpg"; //Linux
 			file.transferTo(new File(filePath));
 			System.out.println("\nUploading Banner Picture Complete");		
 			//ModelAndView view = new ModelAndView("UserPage");
 			//return view;
-			response.sendRedirect("/FakeFaceBook/UserPage");
+			response.sendRedirect("/Valhalla/UserPage");
 		}
 	
 	//Status Upload
@@ -254,12 +262,12 @@ public class MainController {
 			
 			//Establish filepath from local machine to store image
 			//String filePath = "C:/Users/Jonathan/Desktop/Eclipse-Workspace/FakeFaceBook/resources/files/" + user.getemail() +"_Resume.pdf"; 
-			String filePath = "/home/ec2-user/apache-tomcat-9.0.2/webapps/FakeFaceBook/resources/files/" + user.getemail() +"_Resume.jpg"; //Linux
+			String filePath = "/home/ec2-user/apache-tomcat-9.0.2/Valhalla/resources/" + user.getemail() +"_Resume.jpg"; //Linux
 			resume.transferTo(new File(filePath));
 			System.out.println("\nUploading Resume Complete: ");		
 			//ModelAndView view = new ModelAndView("UserPage");
 			//return view;
-			response.sendRedirect("/FakeFaceBook/UserPage");
+			response.sendRedirect("/Valhalla/UserPage");
 		}
 	
 	

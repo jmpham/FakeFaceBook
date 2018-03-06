@@ -1,4 +1,4 @@
-package com.FakeFaceBook.Controller;
+package com.Valhalla.Controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,7 +32,7 @@ public class APIController {
 		try {
 			System.out.println("Trying connection to DBs");
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/FakeFaceBook", "jmpham21", "Amazon1#");
+			Connection MyConn = DriverManager.getConnection("jdbc:mysql://mydbinstance.c0su7dxcxumd.us-east-2.rds.amazonaws.com:3306/Valhalla", "jmpham21", "Amazon1#");
 			Statement MyStmt = MyConn.createStatement();
 			String sql = "SELECT email FROM Users";
 			ResultSet MyRs = MyStmt.executeQuery(sql);

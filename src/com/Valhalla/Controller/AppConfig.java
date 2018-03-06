@@ -1,4 +1,4 @@
-package com.FakeFaceBook.Controller;
+package com.Valhalla.Controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
